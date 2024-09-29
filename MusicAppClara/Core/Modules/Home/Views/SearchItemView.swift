@@ -15,7 +15,7 @@ struct SearchItemView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                MusicCard(image: imagePath)
+                MusicCard(image: imagePath, isArtistDetailsView: false)
                     .frame(width: 75, height: 75, alignment: .leading)
                     .padding(.trailing, 12)
                 VStack(alignment: .leading) {

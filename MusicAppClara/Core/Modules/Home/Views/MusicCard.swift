@@ -11,6 +11,7 @@ struct MusicCard: View {
     
     // MARK: - Properties
     let image: String
+    let isArtistDetailsView: Bool
 
     // MARK: - Body
     var body: some View {
@@ -18,7 +19,7 @@ struct MusicCard: View {
             VStack {
                 imageContainer
             }
-        }.cornerRadius(15)
+        }.cornerRadius(isArtistDetailsView == true ? 0 : 15)
     }
 
     // MARK: - Views
@@ -46,5 +47,5 @@ struct MusicCard: View {
 }
 
 #Preview {
-    MusicCard(image: "")
+    MusicCard(image: "", isArtistDetailsView: false)
 }

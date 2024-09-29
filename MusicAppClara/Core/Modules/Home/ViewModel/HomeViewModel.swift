@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class HomeViewModel: ObservableObject {
     
     // MARK: - Properties
@@ -40,7 +41,12 @@ class HomeViewModel: ObservableObject {
                 guard case let .failure(error) = response else { return }
                 print("There was an error: \(error)")
             } receiveValue: { musicList in
-                self.artistList = musicList.results
+                self.artistList = []
+                for music in musicList.results {
+                    if music.type == "artist" {
+                        self.artistList.append(music)
+                    }
+                }
             }
             .store(in: &cancellables)
     }

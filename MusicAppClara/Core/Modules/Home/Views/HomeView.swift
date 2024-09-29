@@ -16,9 +16,16 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 if viewModel.artistList.count > 0 {
+                    
                     ForEach(viewModel.artistList, id: \.self) { artist in
-                        SearchItemView(imagePath: artist.thumb, title: artist.title, type: artist.type)
+                        NavigationLink(value: artist) {
+                            SearchItemView(imagePath: artist.thumb, title: artist.title, type: artist.type)
+                        }
                     }
+                    
+                    .navigationDestination(for: Artist.self, destination: { artist in
+                        ArtistDetailsView(viewModel: ArtistDetailsViewModel(artistId: artist.id))
+                    })
                 } else {
                     Text("Search for an artist to get started")
                 }
@@ -35,7 +42,7 @@ struct HomeView: View {
         .preferredColorScheme(.dark)
         .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
         .onChange(of: viewModel.searchText) {
-            if viewModel.searchText.count > 3 {
+            if viewModel.searchText.count > 2 {
                 Task(priority: .userInitiated) {
                     await viewModel.getMusic()
                 }
