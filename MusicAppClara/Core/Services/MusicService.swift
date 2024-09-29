@@ -25,6 +25,6 @@ struct MusicService: MusicServiceType {
     
     // MARK: - Functionality
     func getMusic(searchTerm: String) -> AnyPublisher<MusicListResponse, Error> {
-        requester.execute(request: MusicTarget.getMusicList(searchTerm: "nirvana"))
+        requester.execute(request: MusicTarget.getMusicList(searchTerm: searchTerm))
     }
 }

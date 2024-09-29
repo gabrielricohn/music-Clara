@@ -14,6 +14,9 @@ class HomeViewModel: ObservableObject {
     let musicService: MusicServiceType
     private let appConfigManager: AppConfigurationManagerType
     
+    @Published var searchText = ""
+    @Published var artistList: [Artist] = .init()
+    
     private var cancellables: Set<AnyCancellable> = .init()
     
     // MARK: - Initializer
@@ -23,7 +26,7 @@ class HomeViewModel: ObservableObject {
         self.appConfigManager = appConfigManager
     }
     
-    func getMusic(with searchTerm: String) async {
+    func getMusic() async {
 //        pageCounter = page
         
 //        if page == 1 {
@@ -31,13 +34,13 @@ class HomeViewModel: ObservableObject {
 //        }
         
         musicService
-            .getMusic(searchTerm: searchTerm)
+            .getMusic(searchTerm: searchText)
             .receive(on: DispatchQueue.main)
             .sink { response in
                 guard case let .failure(error) = response else { return }
                 print("There was an error: \(error)")
-            } receiveValue: { movieList in
-//                self.addMoviesToList(with: movieList)
+            } receiveValue: { musicList in
+                self.artistList = musicList.results
             }
             .store(in: &cancellables)
     }

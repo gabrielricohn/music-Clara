@@ -22,7 +22,7 @@ enum MusicTarget {
 extension MusicTarget: NetworkingTargetType {
     var requestPath: String {
         switch self {
-        case .getMusicList(let listType):
+        case .getMusicList(_):
             return "database/search"
         case .getMovieDetail(let movieID):
             return "movie/\(movieID)"
@@ -49,7 +49,8 @@ extension MusicTarget: NetworkingTargetType {
     var task: Moya.Task {
         switch self {
         case .getMusicList(let artist):
-            let parameters = ["artist": artist]
+            let parameters = ["q": artist,
+                              "per_page": "30"]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .getMovieDetail, .getMovieCredits,
                 .getSimilarMovie, .getMovieProviders, .getMovieTrailer:
