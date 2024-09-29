@@ -25,8 +25,8 @@ class AppConfigurationManager: AppConfigurationManagerType {
 
 // MARK: - App Configuration Names
 enum AppConfigurationNames: String {
-    case tmbdApiKey = "TMDB_API_KEY"
+    case discogsApiKey = "MUSIC_API_KEY"
     case baseURL = "API_BASE_URL"
     case imagesURL = "IMAGES_BASE_URL"
-    case readToken = "TMDB_READ_TOKEN"
+    case readToken = "MUSIC_READ_TOKEN"
 }

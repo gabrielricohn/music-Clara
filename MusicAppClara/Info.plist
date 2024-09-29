@@ -4,5 +4,7 @@
 <dict>
 	<key>API_BASE_URL</key>
 	<string>https://$(API_BASE_URL)</string>
+	<key>MUSIC_READ_TOKEN</key>
+	<string>$(MUSIC_READ_TOKEN)</string>
 </dict>
 </plist>

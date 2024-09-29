@@ -1,0 +1,59 @@
+//
+//  MusicTarget.swift
+//  MusicAppClara
+//
+//  Created by Gabriel Rico on 28/9/24.
+//
+
+import Foundation
+import Moya
+
+// MARK: - Shows Target
+enum MusicTarget {
+    case getMusicList(searchTerm: String)
+    case getMovieDetail(id: String)
+    case getMovieCredits(movieID: Int)
+    case getSimilarMovie(movieID: Int)
+    case getMovieProviders(movieID: Int)
+    case getMovieTrailer(movieID: Int)
+}
+
+// MARK: - Shows Target Implementation
+extension MusicTarget: NetworkingTargetType {
+    var requestPath: String {
+        switch self {
+        case .getMusicList(let listType):
+            return "database/search"
+        case .getMovieDetail(let movieID):
+            return "movie/\(movieID)"
+        case .getMovieCredits(let movieID):
+            return "movie/\(movieID)/credits"
+        case .getSimilarMovie(let movieID):
+            return "movie/\(movieID)/similar"
+        case .getMovieProviders(let movieID):
+            return "movie/\(movieID)/watch/providers"
+        case .getMovieTrailer(movieID: let movieID):
+            return "movie/\(movieID)/videos"
+        }
+    }
+    
+    var requestMethod: Moya.Method {
+        switch self {
+        case .getMusicList, .getMovieDetail,
+                .getMovieCredits, .getSimilarMovie,
+                .getMovieProviders, .getMovieTrailer:
+            return .get
+        }
+    }
+    
+    var task: Moya.Task {
+        switch self {
+        case .getMusicList(let artist):
+            let parameters = ["artist": artist]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        case .getMovieDetail, .getMovieCredits,
+                .getSimilarMovie, .getMovieProviders, .getMovieTrailer:
+            return .requestPlain
+        }
+    }
+}

@@ -25,11 +25,11 @@ extension NetworkingTargetType {
     var requestHeaders: [String: String]? {
         guard let readToken = AppConfigurationManager.shared.getAppConfiguration(with: .readToken) else {
             return ["accept": "application/json",
-                    "Authorization": "Bearer \(AppConfigurationManager.shared.getAppConfiguration(with: .tmbdApiKey) ?? "")"]
+                    "Authorization": "Discogs token=\(AppConfigurationManager.shared.getAppConfiguration(with: .readToken) ?? "")"]
         }
         
         return ["accept": "application/json",
-                "Authorization": "Bearer \(readToken)"]
+                "Authorization": "Discogs token=\(readToken)"]
     }
 }
 

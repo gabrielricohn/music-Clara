@@ -1,5 +1,5 @@
 //
-//  NetworkRequester.swift
+//  NetworkingRequester.swift
 //  MusicAppClara
 //
 //  Created by Gabriel Rico on 28/9/24.
