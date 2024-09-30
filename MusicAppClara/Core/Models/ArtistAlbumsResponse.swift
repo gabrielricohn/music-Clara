@@ -17,4 +17,5 @@ struct Album: Codable, Hashable {
     let id: Int
     let title: String
     let year: Int?
+    let type: String?
 }

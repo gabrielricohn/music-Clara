@@ -13,6 +13,7 @@ protocol MusicServiceType {
     func getMusic(searchTerm: String) -> AnyPublisher<MusicListResponse, Error>
     func getArtistDetails(artistId: String) -> AnyPublisher<ArtistDetailsResponse, Error>
     func getArtistAlbums(artistId: String) -> AnyPublisher<ArtistAlbumsResponse, Error>
+    func getAlbumDetails(albumId: String, albumType: String) -> AnyPublisher<AlbumDetailsResponse, Error>
 }
 
 // MARK: - Movies Service
@@ -36,5 +37,18 @@ struct MusicService: MusicServiceType {
     
     func getArtistAlbums(artistId: String) -> AnyPublisher<ArtistAlbumsResponse, Error> {
         requester.execute(request: MusicTarget.getArtistAlbums(artistID: artistId))
+    }
+    
+    func getAlbumDetails(albumId: String, albumType: String) -> AnyPublisher<AlbumDetailsResponse, Error> {
+        var fixedAlbumType: String = ""
+        if albumType == "release" {
+            fixedAlbumType = "releases"
+        } else if albumType == "master" {
+            fixedAlbumType = "masters"
+        } else {
+            fixedAlbumType = albumType
+        }
+        
+        return requester.execute(request: MusicTarget.getAlbumDetails(albumID: albumId, albumType: fixedAlbumType))
     }
 }

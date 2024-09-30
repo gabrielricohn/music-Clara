@@ -17,9 +17,7 @@ struct ArtistDetailsView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     MusicCard(image: viewModel.artistDetails?.images.first?.uri ?? "", isArtistDetailsView: true)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2.5, alignment: .leading)
-                        .edgesIgnoringSafeArea(.top)
-                    
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2, alignment: .leading)
                     Group {
                         Text(viewModel.artistDetails?.name ?? "")
                             .foregroundStyle(.white)
@@ -49,6 +47,7 @@ struct ArtistDetailsView: View {
                     .offset(y: -75)
                 }
             }
+            .ignoresSafeArea(.container, edges: .top)
         }
         .preferredColorScheme(.dark)
     }

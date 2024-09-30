@@ -13,10 +13,7 @@ enum MusicTarget {
     case getMusicList(searchTerm: String)
     case getArtistDetails(artistID: String)
     case getArtistAlbums(artistID: String)
-    case getMovieCredits(movieID: Int)
-    case getSimilarMovie(movieID: Int)
-    case getMovieProviders(movieID: Int)
-    case getMovieTrailer(movieID: Int)
+    case getAlbumDetails(albumID: String, albumType: String)
 }
 
 // MARK: - Shows Target Implementation
@@ -29,22 +26,14 @@ extension MusicTarget: NetworkingTargetType {
             return "artists/\(artistID)"
         case .getArtistAlbums(let artistID):
             return "artists/\(artistID)/releases"
-        case .getMovieCredits(let movieID):
-            return "movie/\(movieID)/credits"
-        case .getSimilarMovie(let movieID):
-            return "movie/\(movieID)/similar"
-        case .getMovieProviders(let movieID):
-            return "movie/\(movieID)/watch/providers"
-        case .getMovieTrailer(movieID: let movieID):
-            return "movie/\(movieID)/videos"
+        case .getAlbumDetails(let albumID, let albumType):
+            return "\(albumType)/\(albumID)"
         }
     }
     
     var requestMethod: Moya.Method {
         switch self {
-        case .getMusicList, .getArtistDetails, .getArtistAlbums,
-                .getMovieCredits, .getSimilarMovie,
-                .getMovieProviders, .getMovieTrailer:
+        case .getMusicList, .getArtistDetails, .getArtistAlbums, .getAlbumDetails:
             return .get
         }
     }
@@ -55,8 +44,7 @@ extension MusicTarget: NetworkingTargetType {
             let parameters = ["q": artist,
                               "per_page": "30"]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .getArtistDetails, .getArtistAlbums, .getMovieCredits,
-                .getSimilarMovie, .getMovieProviders, .getMovieTrailer:
+        case .getArtistDetails, .getArtistAlbums, .getAlbumDetails:
             return .requestPlain
         }
     }

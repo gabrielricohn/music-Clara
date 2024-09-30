@@ -9,58 +9,74 @@ import SwiftUI
 
 struct AlbumsView: View {
     @ObservedObject var viewModel: AlbumsViewModel
+    @Environment(\.dismiss) var dismiss
         
     var body: some View {
-        VStack {
+        NavigationView {
             ScrollView {
                 ForEach(viewModel.albums, id: \.self) { album in
-                    SearchItemView(imagePath: "", title: album.title, type: "\(album.year ?? 2024)")
-                }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        HStack {
-                            Text("Releases")
-                                .font(.title)
-                        }
+                    NavigationLink {
+                        AlbumDetailsView(viewModel: AlbumDetailsViewModel(albumID: "\(album.id)", albumType: album.type ?? ""))
+                    } label: {
+                        SearchItemView(imagePath: "", title: album.title, type: "\(album.year ?? 2024)")
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
+                }
+            }
+        }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left.circle")
+                            .foregroundStyle(.white)
+                    }
+                }
+            }
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Text("Releases")
+                        .font(.title)
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Section("Filter By:") {
                         Menu {
-                            Section("Filter By:") {
-                                Menu {
-                                    Button {
-                                        viewModel.filterByAlphabet(isAscending: true)
-                                    } label: {
-                                        Text("Ascending")
-                                    }
-                                    Button {
-                                        viewModel.filterByAlphabet(isAscending: false)
-                                    } label: {
-                                        Text("Descending")
-                                    }
-                                } label: {
-                                    Text("Alphabetical")
-                                }
-                                
-                                Menu {
-                                    Button {
-                                        viewModel.filterByYear(isAscending: true)
-                                    } label: {
-                                        Text("Ascending")
-                                    }
-                                    Button {
-                                        viewModel.filterByYear(isAscending: false)
-                                    } label: {
-                                        Text("Descending")
-                                    }
-                                } label: {
-                                    Text("Year")
-                                }
+                            Button {
+                                viewModel.filterByAlphabet(isAscending: true)
+                            } label: {
+                                Text("Ascending")
+                            }
+                            Button {
+                                viewModel.filterByAlphabet(isAscending: false)
+                            } label: {
+                                Text("Descending")
                             }
                         } label: {
-                            Image(systemName: "ellipsis.circle")
-                                .foregroundStyle(.white)
+                            Text("Alphabetical")
+                        }
+                        
+                        Menu {
+                            Button {
+                                viewModel.filterByYear(isAscending: true)
+                            } label: {
+                                Text("Ascending")
+                            }
+                            Button {
+                                viewModel.filterByYear(isAscending: false)
+                            } label: {
+                                Text("Descending")
+                            }
+                        } label: {
+                            Text("Year")
                         }
                     }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .foregroundStyle(.white)
                 }
             }
         }
