@@ -11,12 +11,12 @@ import Combine
 @MainActor
 class HomeViewModel: ObservableObject {
     
+    @Published var searchText = ""
+    @Published var artistList: [Artist] = .init()
+    
     // MARK: - Properties
     let musicService: MusicServiceType
     private let appConfigManager: AppConfigurationManagerType
-    
-    @Published var searchText = ""
-    @Published var artistList: [Artist] = .init()
     
     private var cancellables: Set<AnyCancellable> = .init()
     

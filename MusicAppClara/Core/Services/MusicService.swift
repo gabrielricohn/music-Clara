@@ -12,6 +12,7 @@ import Combine
 protocol MusicServiceType {
     func getMusic(searchTerm: String) -> AnyPublisher<MusicListResponse, Error>
     func getArtistDetails(artistId: String) -> AnyPublisher<ArtistDetailsResponse, Error>
+    func getArtistAlbums(artistId: String) -> AnyPublisher<ArtistAlbumsResponse, Error>
 }
 
 // MARK: - Movies Service
@@ -31,5 +32,9 @@ struct MusicService: MusicServiceType {
     
     func getArtistDetails(artistId: String) -> AnyPublisher<ArtistDetailsResponse, Error> {
         requester.execute(request: MusicTarget.getArtistDetails(artistID: artistId))
+    }
+    
+    func getArtistAlbums(artistId: String) -> AnyPublisher<ArtistAlbumsResponse, Error> {
+        requester.execute(request: MusicTarget.getArtistAlbums(artistID: artistId))
     }
 }

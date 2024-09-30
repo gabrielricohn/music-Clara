@@ -12,6 +12,7 @@ import Moya
 enum MusicTarget {
     case getMusicList(searchTerm: String)
     case getArtistDetails(artistID: String)
+    case getArtistAlbums(artistID: String)
     case getMovieCredits(movieID: Int)
     case getSimilarMovie(movieID: Int)
     case getMovieProviders(movieID: Int)
@@ -26,6 +27,8 @@ extension MusicTarget: NetworkingTargetType {
             return "database/search"
         case .getArtistDetails(let artistID):
             return "artists/\(artistID)"
+        case .getArtistAlbums(let artistID):
+            return "artists/\(artistID)/releases"
         case .getMovieCredits(let movieID):
             return "movie/\(movieID)/credits"
         case .getSimilarMovie(let movieID):
@@ -39,7 +42,7 @@ extension MusicTarget: NetworkingTargetType {
     
     var requestMethod: Moya.Method {
         switch self {
-        case .getMusicList, .getArtistDetails,
+        case .getMusicList, .getArtistDetails, .getArtistAlbums,
                 .getMovieCredits, .getSimilarMovie,
                 .getMovieProviders, .getMovieTrailer:
             return .get
@@ -52,7 +55,7 @@ extension MusicTarget: NetworkingTargetType {
             let parameters = ["q": artist,
                               "per_page": "30"]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .getArtistDetails, .getMovieCredits,
+        case .getArtistDetails, .getArtistAlbums, .getMovieCredits,
                 .getSimilarMovie, .getMovieProviders, .getMovieTrailer:
             return .requestPlain
         }
