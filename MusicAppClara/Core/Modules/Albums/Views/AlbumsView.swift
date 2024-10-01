@@ -13,13 +13,20 @@ struct AlbumsView: View {
         
     var body: some View {
         NavigationView {
-            ScrollView {
-                ForEach(viewModel.albums, id: \.self) { album in
-                    NavigationLink {
-                        AlbumDetailsView(viewModel: AlbumDetailsViewModel(albumID: "\(album.id)", albumType: album.type ?? ""))
-                    } label: {
-                        SearchItemView(imagePath: "", title: album.title, type: "\(album.year ?? 2024)")
+            ZStack {
+                ScrollView {
+                    ForEach(viewModel.albums, id: \.self) { album in
+                        NavigationLink {
+                            AlbumDetailsView(viewModel: AlbumDetailsViewModel(albumID: "\(album.id)", albumType: album.type ?? ""))
+                        } label: {
+                            SearchItemView(imagePath: "", title: album.title, type: "\(album.year ?? 2024)")
+                        }
                     }
+                }
+                if viewModel.isLoading {
+                    ActivityIndicator()
+                        .frame(width: 200, height: 200)
+                        .foregroundColor(.orange)
                 }
             }
         }
@@ -88,6 +95,7 @@ struct AlbumsView: View {
         }
         .onAppear() {
             Task {
+                viewModel.isLoading = true
                 await viewModel.fetchAlbums()
             }
         }

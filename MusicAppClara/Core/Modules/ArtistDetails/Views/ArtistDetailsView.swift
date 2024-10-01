@@ -14,37 +14,44 @@ struct ArtistDetailsView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    MusicCard(image: viewModel.artistDetails?.images.first?.uri ?? "", isArtistDetailsView: true)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2, alignment: .leading)
-                    Group {
-                        Text(viewModel.artistDetails?.name ?? "")
-                            .foregroundStyle(.white)
-                            .font(.largeTitle)
-                            .bold()
-                            .padding([.top, .leading, .bottom], 12)
-                        if viewModel.artistDetails?.members?.isEmpty == false {
-                            membersView
-                        }
-                        
-                        NavigationLink {
-                            AlbumsView(viewModel: AlbumsViewModel(artistID: "\(viewModel.artistId)"))
-                        } label: {
-                            HStack {
-                                Text("Albums")
-                                    .foregroundStyle(.white)
-                                    .font(.title)
-                                Image(systemName: "chevron.forward")
-                                    .foregroundColor(.gray)
+            ZStack {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        MusicCard(image: viewModel.artistDetails?.images.first?.uri ?? "", isArtistDetailsView: true)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2, alignment: .leading)
+                        Group {
+                            Text(viewModel.artistDetails?.name ?? "")
+                                .foregroundStyle(.white)
+                                .font(.largeTitle)
+                                .bold()
+                                .padding([.top, .leading, .bottom], 12)
+                            if viewModel.artistDetails?.members?.isEmpty == false {
+                                membersView
                             }
+                            
+                            NavigationLink {
+                                AlbumsView(viewModel: AlbumsViewModel(artistID: "\(viewModel.artistId)"))
+                            } label: {
+                                HStack {
+                                    Text("Albums")
+                                        .foregroundStyle(.white)
+                                        .font(.title)
+                                    Image(systemName: "chevron.forward")
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                            .padding(.bottom, 12)
+                            
+                            aboutView
                         }
-                        .padding(.bottom, 12)
-                        
-                        aboutView
+                        .padding([.leading, .trailing], 8)
+                        .offset(y: -75)
                     }
-                    .padding([.leading, .trailing], 8)
-                    .offset(y: -75)
+                }
+                if viewModel.isLoading {
+                    ActivityIndicator()
+                        .frame(width: 200, height: 200)
+                        .foregroundColor(.orange)
                 }
             }
             .ignoresSafeArea(.container, edges: .top)

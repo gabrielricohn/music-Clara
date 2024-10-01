@@ -16,6 +16,7 @@ class AlbumDetailsViewModel: ObservableObject {
     @Published var albumDetails: AlbumDetailsResponse?
     @Published var errorMessage: String?
     @Published var isErrorFromNetwork: Bool = false
+    @Published var isLoading: Bool = false
     
     // MARK: - Properties
     let musicService: MusicServiceType
@@ -37,12 +38,14 @@ class AlbumDetailsViewModel: ObservableObject {
     func getAlbumDetails() async {
         musicService.getAlbumDetails(albumId: albumID, albumType: albumType)
             .receive(on: DispatchQueue.main)
-            .sink { response in
+            .sink { [weak self] response in
+                self?.isLoading = false
                 guard case let .failure(error) = response else { return }
-                self.errorMessage = error.localizedDescription
-                self.isErrorFromNetwork.toggle()
+                self?.errorMessage = error.localizedDescription
+                self?.isErrorFromNetwork.toggle()
                 print("There was an error: \(error)")
             } receiveValue: { albumDetails in
+                self.isLoading = false
                 self.albumDetails = albumDetails
             }
             .store(in: &cancellables)
