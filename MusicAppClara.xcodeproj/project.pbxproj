@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		38DECBC22CA8F13E006468C3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 38DECBC12CA8F13E006468C3 /* CombineMoya */; };
+		38DECBC42CA8F13E006468C3 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 38DECBC32CA8F13E006468C3 /* Moya */; };
+		38DECBC62CA8F13E006468C3 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 38DECBC52CA8F13E006468C3 /* ReactiveMoya */; };
+		38DECBC82CA8F13E006468C3 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 38DECBC72CA8F13E006468C3 /* RxMoya */; };
+		38DECBD92CA8F21E006468C3 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 38DECBD82CA8F21E006468C3 /* Secrets.xcconfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		38DECB9D2CA8E46D006468C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,11 +35,25 @@
 		38DECB872CA8E46B006468C3 /* MusicAppClara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicAppClara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38DECB9C2CA8E46D006468C3 /* MusicAppClaraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppClaraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38DECBA62CA8E46D006468C3 /* MusicAppClaraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppClaraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38DECBD82CA8F21E006468C3 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		38DECBDB2CA8F2B9006468C3 /* Exceptions for "MusicAppClara" folder in "MusicAppClara" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 38DECB862CA8E46B006468C3 /* MusicAppClara */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		38DECB892CA8E46B006468C3 /* MusicAppClara */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				38DECBDB2CA8F2B9006468C3 /* Exceptions for "MusicAppClara" folder in "MusicAppClara" target */,
+			);
 			path = MusicAppClara;
 			sourceTree = "<group>";
 		};
@@ -52,6 +74,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38DECBC42CA8F13E006468C3 /* Moya in Frameworks */,
+				38DECBC22CA8F13E006468C3 /* CombineMoya in Frameworks */,
+				38DECBC82CA8F13E006468C3 /* RxMoya in Frameworks */,
+				38DECBC62CA8F13E006468C3 /* ReactiveMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +101,7 @@
 		38DECB7E2CA8E46B006468C3 = {
 			isa = PBXGroup;
 			children = (
+				38DECBD82CA8F21E006468C3 /* Secrets.xcconfig */,
 				38DECB892CA8E46B006468C3 /* MusicAppClara */,
 				38DECB9F2CA8E46D006468C3 /* MusicAppClaraTests */,
 				38DECBA92CA8E46D006468C3 /* MusicAppClaraUITests */,
@@ -112,6 +139,10 @@
 			);
 			name = MusicAppClara;
 			packageProductDependencies = (
+				38DECBC12CA8F13E006468C3 /* CombineMoya */,
+				38DECBC32CA8F13E006468C3 /* Moya */,
+				38DECBC52CA8F13E006468C3 /* ReactiveMoya */,
+				38DECBC72CA8F13E006468C3 /* RxMoya */,
 			);
 			productName = MusicAppClara;
 			productReference = 38DECB872CA8E46B006468C3 /* MusicAppClara.app */;
@@ -195,6 +226,10 @@
 			);
 			mainGroup = 38DECB7E2CA8E46B006468C3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				38DECBC02CA8F13E006468C3 /* XCRemoteSwiftPackageReference "Moya" */,
+				38DECD2B2CAA7612006468C3 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 38DECB882CA8E46B006468C3 /* Products */;
 			projectDirPath = "";
@@ -212,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38DECBD92CA8F21E006468C3 /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +426,7 @@
 		};
 		38DECBB12CA8E46D006468C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38DECBD82CA8F21E006468C3 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -399,9 +436,10 @@
 				DEVELOPMENT_TEAM = LPMZ52PP6S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicAppClara/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -409,7 +447,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = beyondinfinity.pro.MusicAppClara;
+				PRODUCT_BUNDLE_IDENTIFIER = beyondinfinity.pro.musicAppClara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -419,6 +457,7 @@
 		};
 		38DECBB22CA8E46D006468C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38DECBD82CA8F21E006468C3 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -428,9 +467,10 @@
 				DEVELOPMENT_TEAM = LPMZ52PP6S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicAppClara/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -438,7 +478,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = beyondinfinity.pro.MusicAppClara;
+				PRODUCT_BUNDLE_IDENTIFIER = beyondinfinity.pro.musicAppClara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -558,6 +598,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		38DECBC02CA8F13E006468C3 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		38DECD2B2CAA7612006468C3 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		38DECBC12CA8F13E006468C3 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38DECBC02CA8F13E006468C3 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		38DECBC32CA8F13E006468C3 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38DECBC02CA8F13E006468C3 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		38DECBC52CA8F13E006468C3 /* ReactiveMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38DECBC02CA8F13E006468C3 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = ReactiveMoya;
+		};
+		38DECBC72CA8F13E006468C3 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38DECBC02CA8F13E006468C3 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 38DECB7F2CA8E46B006468C3 /* Project object */;
 }
