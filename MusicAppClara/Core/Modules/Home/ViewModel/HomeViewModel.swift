@@ -13,6 +13,8 @@ class HomeViewModel: ObservableObject {
     
     @Published var searchText = ""
     @Published var artistList: [Artist] = .init()
+    @Published var errorMessage: String?
+    @Published var isErrorFromNetwork: Bool = false
     
     // MARK: - Properties
     let musicService: MusicServiceType
@@ -28,17 +30,12 @@ class HomeViewModel: ObservableObject {
     }
     
     func getMusic() async {
-//        pageCounter = page
-        
-//        if page == 1 {
-//            movieList.removeAll()
-//        }
-        
-        musicService
-            .getMusic(searchTerm: searchText)
+        musicService.getMusic(searchTerm: searchText)
             .receive(on: DispatchQueue.main)
             .sink { response in
                 guard case let .failure(error) = response else { return }
+                self.errorMessage = error.localizedDescription
+                self.isErrorFromNetwork.toggle()
                 print("There was an error: \(error)")
             } receiveValue: { musicList in
                 self.artistList = []

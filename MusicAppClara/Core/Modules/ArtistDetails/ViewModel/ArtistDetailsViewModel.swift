@@ -15,6 +15,8 @@ class ArtistDetailsViewModel: ObservableObject {
     
     @Published var searchText = ""
     @Published var artistDetails: ArtistDetailsResponse?
+    @Published var errorMessage: String?
+    @Published var isErrorFromNetwork: Bool = false
     
     // MARK: - Properties
     let musicService: MusicServiceType
@@ -41,6 +43,8 @@ class ArtistDetailsViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] response in
                 guard case let .failure(error) = response else { return }
+                self?.errorMessage = error.localizedDescription
+                self?.isErrorFromNetwork.toggle()
                 print("There was an error: \(error)")
             } receiveValue: { artistDetails in
                 self.artistDetails = artistDetails

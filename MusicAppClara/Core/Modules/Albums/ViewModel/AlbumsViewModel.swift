@@ -12,6 +12,8 @@ class AlbumsViewModel: ObservableObject {
     
     let artistID: String
     @Published var albums: [Album] = []
+    @Published var errorMessage: String?
+    @Published var isErrorFromNetwork: Bool = false
     
     // MARK: - Properties
     let musicService: MusicServiceType
@@ -33,6 +35,8 @@ class AlbumsViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] response in
                 guard case let .failure(error) = response else { return }
+                self?.errorMessage = error.localizedDescription
+                self?.isErrorFromNetwork.toggle()
                 print("There was an error: \(error)")
             } receiveValue: { album in
                 self.albums = album.releases

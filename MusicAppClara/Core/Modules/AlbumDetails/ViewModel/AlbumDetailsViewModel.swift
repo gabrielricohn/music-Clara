@@ -9,9 +9,13 @@ import Foundation
 import Combine
 
 class AlbumDetailsViewModel: ObservableObject {
+    
     let albumID: String
     let albumType: String
+    
     @Published var albumDetails: AlbumDetailsResponse?
+    @Published var errorMessage: String?
+    @Published var isErrorFromNetwork: Bool = false
     
     // MARK: - Properties
     let musicService: MusicServiceType
@@ -35,6 +39,8 @@ class AlbumDetailsViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { response in
                 guard case let .failure(error) = response else { return }
+                self.errorMessage = error.localizedDescription
+                self.isErrorFromNetwork.toggle()
                 print("There was an error: \(error)")
             } receiveValue: { albumDetails in
                 self.albumDetails = albumDetails

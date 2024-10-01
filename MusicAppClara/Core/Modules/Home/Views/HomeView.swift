@@ -41,6 +41,11 @@ struct HomeView: View {
         }
         .preferredColorScheme(.dark)
         .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .alert(isPresented: $viewModel.isErrorFromNetwork) {
+            Alert(title: Text("Network Error"),
+                  message: Text(viewModel.errorMessage ?? ""),
+                  dismissButton: .default(Text("OK")))
+        }
         .onChange(of: viewModel.searchText) {
             if viewModel.searchText.count > 2 {
                 Task(priority: .userInitiated) {

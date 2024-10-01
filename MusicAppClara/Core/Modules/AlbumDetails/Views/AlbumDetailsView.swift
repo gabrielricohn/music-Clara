@@ -68,6 +68,11 @@ struct AlbumDetailsView: View {
                 }
             }
         }
+        .alert(isPresented: $viewModel.isErrorFromNetwork) {
+            Alert(title: Text("Network Error"),
+                  message: Text(viewModel.errorMessage ?? ""),
+                  dismissButton: .default(Text("OK")))
+        }
         .onAppear {
             Task {
                 await viewModel.getAlbumDetails()
