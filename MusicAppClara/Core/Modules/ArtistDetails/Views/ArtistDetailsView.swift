@@ -19,12 +19,18 @@ struct ArtistDetailsView: View {
                     VStack(alignment: .leading) {
                         MusicCard(image: viewModel.artistDetails?.images.first?.uri ?? "", isArtistDetailsView: true)
                             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2, alignment: .leading)
+                            .mask(LinearGradient(gradient: Gradient(stops: [
+                                .init(color: .black, location: 0),
+                                .init(color: .clear, location: 1),
+                                .init(color: .black, location: 1),
+                                .init(color: .clear, location: 1)
+                            ]), startPoint: .top, endPoint: .bottom))
                         Group {
                             Text(viewModel.artistDetails?.name ?? "")
                                 .foregroundStyle(.white)
                                 .font(.largeTitle)
                                 .bold()
-                                .padding([.top, .leading, .bottom], 12)
+                                .padding([.top, .bottom], 12)
                             if viewModel.artistDetails?.members?.isEmpty == false {
                                 membersView
                             }
@@ -44,7 +50,7 @@ struct ArtistDetailsView: View {
                             
                             aboutView
                         }
-                        .padding([.leading, .trailing], 8)
+                        .padding([.leading, .trailing], 12)
                         .offset(y: -75)
                     }
                 }
